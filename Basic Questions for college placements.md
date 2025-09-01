@@ -1031,4 +1031,38 @@ public static boolean isMaxHeap(int[] arr) {
 ```
 
 43. build max or min heap from unsorted array: call downheap function from non leaf nodes i.e. n/2-1;
-44. 
+44. Path Sum:
+```java
+class Solution {
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if (root == null) {
+            return false;
+        }
+        
+        if (root.left == null && root.right == null) {
+            return targetSum == root.val;
+        }
+        
+        boolean leftSum = hasPathSum(root.left, targetSum - root.val);
+        boolean rightSum = hasPathSum(root.right, targetSum - root.val);
+        
+        return leftSum || rightSum;
+    }
+ }           
+```
+45. Same tree
+```java
+class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p == null && q == null) return true;
+        if(p == null || q == null) return false;
+        if(p.val != q.val) return false;
+
+        boolean leftSame = isSameTree(p.left, q.left);
+        boolean rightSame = isSameTree(p.right, q.right);
+
+        return leftSame && rightSame;
+    }
+ }
+```
+46. 

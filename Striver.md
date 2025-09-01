@@ -1703,6 +1703,39 @@ class Solution {
 }
 ```
 
+71. reverse k groups:
+    ```
+    public static ListNode reverseKGroup(ListNode head, int k) {
+        if (head == null || k == 1) return head;
+        
+        // Check if we have k nodes remaining
+        ListNode curr = head;
+        int count = 0;
+        while (curr != null && count < k) {
+            curr = curr.next;
+            count++;
+        }
+        
+        // If we have k nodes, reverse them
+        if (count == k) {
+            curr = reverseKGroup(curr, k); // Recursively reverse rest
+            
+            // Reverse current k nodes
+            ListNode prev = curr;
+            ListNode current = head;
+            
+            while (count > 0) {
+                ListNode next = current.next;
+                current.next = prev;
+                prev = current;
+                current = next;
+                count--;
+            }
+            head = prev;
+        }
+        return head;
+    }
+    ```
 ##### Sliding Window:
 71. Longest substring without repeating chracters:
 ```java
