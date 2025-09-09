@@ -458,23 +458,51 @@ nCr = n! / r! x (n-r)!
 ![[Pasted image 20250721221437.png]]
 
 ```
-class Solution:
-    def nCr(self, n: int, r: int) -> int:
-        res = 1
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> result = new ArrayList<>();
+        for(int i = 1; i <= numRows; i++){
+            List<Integer> temp = new ArrayList<>();
+            for(int j = 1; j <= i; j++){
+                temp.add(nCr(i-1, j-1));
+            }
+            result.add(temp);
+        }
+        return result;
+    }
+    public int nCr(int n, int r){
+        if(r > n - r) r = n-r;
+        int result = 1;
+        for(int i = 0; i < r; i++){
+            result = result * (n-i) / (i+1) ;
+        }
+        return result;
+    }
+ }
+```
 
-        for i in range(r):
-            res *= (n-i)
-            res //= (i+1)
-
-        return res
-    def generate(self, numRows: int) -> List[List[int]]:
-        res = []
-        for i in range(1, numRows+1):
-            arr = []
-            for j in range(1, i+1):
-                arr.append(self.nCr(i-1, j-1))
-            res.append(arr)
-        return res
+```java
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> result = new ArrayList<>();
+        for(int i = 1; i <= numRows; i++){
+            List<Integer> temp = new ArrayList<>();
+            for(int j = 1; j <= i; j++){
+                temp.add(nCr(i-1, j-1));
+            }
+            result.add(temp);
+        }
+        return result;
+    }
+    public int nCr(int n, int r){
+        if(r > n - r) r = n-r;
+        long result = 1;
+        for(int i = 0; i < r; i++){
+            result = result * (n-i) / (i+1) ;
+        }
+        return (int)result;
+    }
+ }
 ```
 
 31. Majority Element II: use Extended Boyer Moore’s Voting Algorithm
